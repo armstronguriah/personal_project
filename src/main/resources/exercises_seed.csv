@@ -1,0 +1,239 @@
+name,primaryMuscle,equipment,movementPattern,description
+Barbell Back Squat,Quadriceps,Barbell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Barbell Front Squat,Quadriceps,Barbell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Barbell Box Squat,Quadriceps,Barbell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Barbell Pause Squat,Quadriceps,Barbell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Barbell Zercher Squat,Quadriceps,Barbell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Barbell Landmine Squat,Quadriceps,Barbell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Dumbbell Goblet Squat,Quadriceps,Dumbbell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Dumbbell Front Squat,Quadriceps,Dumbbell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Dumbbell Sumo Squat,Quadriceps,Dumbbell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Dumbbell Heel Elevated Squat,Quadriceps,Dumbbell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Kettlebell Goblet Squat,Quadriceps,Kettlebell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Kettlebell Front Squat,Quadriceps,Kettlebell,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Bodyweight Squat,Quadriceps,Bodyweight,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Bodyweight Pause Squat,Quadriceps,Bodyweight,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Bodyweight Jump Squat,Quadriceps,Bodyweight,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Bodyweight Wall Sit,Quadriceps,Bodyweight,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Resistance Band Squat,Quadriceps,Resistance Band,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Resistance Band Front Squat,Quadriceps,Resistance Band,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Machine Hack Squat,Quadriceps,Machine,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Machine Pendulum Squat,Quadriceps,Machine,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Machine Leg Press,Quadriceps,Machine,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Machine Smith Squat,Quadriceps,Machine,SQUAT,Bend at the knees and hips with a controlled range of motion.
+Barbell Conventional Deadlift,Hamstrings,Barbell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Barbell Sumo Deadlift,Glutes,Barbell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Barbell Romanian Deadlift,Hamstrings,Barbell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Barbell Stiff Leg Deadlift,Hamstrings,Barbell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Barbell Good Morning,Hamstrings,Barbell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Barbell Hip Thrust,Glutes,Barbell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Barbell Rack Pull,Back,Barbell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Dumbbell Romanian Deadlift,Hamstrings,Dumbbell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Dumbbell Single Leg Romanian Deadlift,Hamstrings,Dumbbell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Dumbbell Hip Thrust,Glutes,Dumbbell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Dumbbell Sumo Deadlift,Glutes,Dumbbell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Kettlebell Deadlift,Hamstrings,Kettlebell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Kettlebell Swing,Glutes,Kettlebell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Kettlebell Romanian Deadlift,Hamstrings,Kettlebell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Kettlebell Single Leg Deadlift,Hamstrings,Kettlebell,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Bodyweight Glute Bridge,Glutes,Bodyweight,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Bodyweight Single Leg Glute Bridge,Glutes,Bodyweight,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Bodyweight Hip Hinge,Hamstrings,Bodyweight,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Bodyweight Hip Thrust,Glutes,Bodyweight,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Resistance Band Good Morning,Hamstrings,Resistance Band,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Resistance Band Romanian Deadlift,Hamstrings,Resistance Band,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Resistance Band Glute Bridge,Glutes,Resistance Band,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Cable Pull Through,Glutes,Cable,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Cable Romanian Deadlift,Hamstrings,Cable,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Machine Back Extension,Glutes,Machine,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Machine Hip Thrust,Glutes,Machine,HINGE,Move primarily at the hips while keeping the trunk controlled.
+Barbell Reverse Lunge,Quadriceps,Barbell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Barbell Walking Lunge,Quadriceps,Barbell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Barbell Bulgarian Split Squat,Quadriceps,Barbell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Dumbbell Reverse Lunge,Quadriceps,Dumbbell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Dumbbell Walking Lunge,Quadriceps,Dumbbell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Dumbbell Forward Lunge,Quadriceps,Dumbbell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Dumbbell Lateral Lunge,Glutes,Dumbbell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Dumbbell Bulgarian Split Squat,Quadriceps,Dumbbell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Dumbbell Step Up,Quadriceps,Dumbbell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Kettlebell Reverse Lunge,Quadriceps,Kettlebell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Kettlebell Walking Lunge,Quadriceps,Kettlebell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Kettlebell Step Up,Quadriceps,Kettlebell,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Bodyweight Reverse Lunge,Quadriceps,Bodyweight,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Bodyweight Forward Lunge,Quadriceps,Bodyweight,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Bodyweight Walking Lunge,Quadriceps,Bodyweight,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Bodyweight Lateral Lunge,Glutes,Bodyweight,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Bodyweight Bulgarian Split Squat,Quadriceps,Bodyweight,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Bodyweight Step Up,Quadriceps,Bodyweight,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Resistance Band Reverse Lunge,Quadriceps,Resistance Band,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Resistance Band Split Squat,Quadriceps,Resistance Band,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Machine Smith Split Squat,Quadriceps,Machine,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Machine Smith Reverse Lunge,Quadriceps,Machine,LUNGE,Maintain balance and use a comfortable stride and range of motion.
+Barbell Bench Press,Chest,Barbell,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Barbell Incline Bench Press,Chest,Barbell,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Barbell Close Grip Bench Press,Triceps,Barbell,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Barbell Floor Press,Chest,Barbell,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Barbell Pause Bench Press,Chest,Barbell,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Dumbbell Flat Bench Press,Chest,Dumbbell,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Dumbbell Incline Bench Press,Chest,Dumbbell,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Dumbbell Decline Bench Press,Chest,Dumbbell,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Dumbbell Floor Press,Chest,Dumbbell,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Dumbbell Neutral Grip Press,Chest,Dumbbell,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Dumbbell Single Arm Floor Press,Chest,Dumbbell,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Bodyweight Push Up,Chest,Bodyweight,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Bodyweight Incline Push Up,Chest,Bodyweight,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Bodyweight Decline Push Up,Chest,Bodyweight,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Bodyweight Diamond Push Up,Triceps,Bodyweight,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Bodyweight Wide Push Up,Chest,Bodyweight,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Bodyweight Tempo Push Up,Chest,Bodyweight,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Resistance Band Chest Press,Chest,Resistance Band,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Resistance Band Push Up,Chest,Resistance Band,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Resistance Band Single Arm Chest Press,Chest,Resistance Band,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Cable Standing Chest Press,Chest,Cable,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Cable Single Arm Chest Press,Chest,Cable,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Machine Chest Press,Chest,Machine,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Machine Incline Chest Press,Chest,Machine,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Machine Smith Bench Press,Chest,Machine,HORIZONTAL_PUSH,Press forward with controlled movement and stable positioning.
+Barbell Overhead Press,Shoulders,Barbell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Barbell Seated Overhead Press,Shoulders,Barbell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Barbell Push Press,Shoulders,Barbell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Barbell Z Press,Shoulders,Barbell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Dumbbell Shoulder Press,Shoulders,Dumbbell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Dumbbell Seated Shoulder Press,Shoulders,Dumbbell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Dumbbell Arnold Press,Shoulders,Dumbbell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Dumbbell Alternating Shoulder Press,Shoulders,Dumbbell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Dumbbell Neutral Grip Overhead Press,Shoulders,Dumbbell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Kettlebell Single Arm Press,Shoulders,Kettlebell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Kettlebell Push Press,Shoulders,Kettlebell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Kettlebell Bottoms Up Press,Shoulders,Kettlebell,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Bodyweight Pike Push Up,Shoulders,Bodyweight,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Bodyweight Elevated Pike Push Up,Shoulders,Bodyweight,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Bodyweight Handstand Push Up,Shoulders,Bodyweight,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Resistance Band Overhead Press,Shoulders,Resistance Band,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Resistance Band Single Arm Overhead Press,Shoulders,Resistance Band,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Cable Shoulder Press,Shoulders,Cable,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Machine Shoulder Press,Shoulders,Machine,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Machine Smith Overhead Press,Shoulders,Machine,VERTICAL_PUSH,Press upward in a controlled and comfortable range of motion.
+Barbell Bent Over Row,Back,Barbell,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Barbell Pendlay Row,Back,Barbell,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Barbell Yates Row,Back,Barbell,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Barbell Landmine Row,Back,Barbell,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Barbell Meadows Row,Back,Barbell,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Dumbbell One Arm Row,Back,Dumbbell,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Dumbbell Bent Over Row,Back,Dumbbell,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Dumbbell Chest Supported Row,Back,Dumbbell,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Dumbbell Rear Delt Row,Shoulders,Dumbbell,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Kettlebell Gorilla Row,Back,Kettlebell,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Kettlebell Single Arm Row,Back,Kettlebell,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Bodyweight Inverted Row,Back,Bodyweight,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Bodyweight Underhand Inverted Row,Back,Bodyweight,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Bodyweight Wide Grip Inverted Row,Back,Bodyweight,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Resistance Band Seated Row,Back,Resistance Band,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Resistance Band Bent Over Row,Back,Resistance Band,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Resistance Band Single Arm Row,Back,Resistance Band,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Cable Seated Row,Back,Cable,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Cable Wide Grip Row,Back,Cable,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Cable Single Arm Row,Back,Cable,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Cable Face Pull,Shoulders,Cable,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Machine Chest Supported Row,Back,Machine,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Machine High Row,Back,Machine,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Machine Seated Row,Back,Machine,HORIZONTAL_PULL,Pull toward the torso while controlling the shoulder movement.
+Barbell Pullover,Back,Barbell,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Dumbbell Pullover,Back,Dumbbell,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Kettlebell Pullover,Back,Kettlebell,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Bodyweight Pull Up,Back,Bodyweight,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Bodyweight Chin Up,Back,Bodyweight,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Bodyweight Neutral Grip Pull Up,Back,Bodyweight,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Bodyweight Assisted Pull Up,Back,Bodyweight,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Bodyweight Negative Pull Up,Back,Bodyweight,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Resistance Band Lat Pulldown,Back,Resistance Band,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Resistance Band Assisted Pull Up,Back,Resistance Band,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Resistance Band Straight Arm Pulldown,Back,Resistance Band,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Cable Lat Pulldown,Back,Cable,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Cable Close Grip Lat Pulldown,Back,Cable,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Cable Underhand Lat Pulldown,Back,Cable,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Cable Straight Arm Pulldown,Back,Cable,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Cable Single Arm Lat Pulldown,Back,Cable,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Machine Lat Pulldown,Back,Machine,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Machine Assisted Pull Up,Back,Machine,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Machine Pullover,Back,Machine,VERTICAL_PULL,Pull downward or toward the body without excessive swinging.
+Bodyweight Plank,Core,Bodyweight,CORE,Maintain steady breathing and controlled trunk positioning.
+Bodyweight Side Plank,Core,Bodyweight,CORE,Maintain steady breathing and controlled trunk positioning.
+Bodyweight Dead Bug,Core,Bodyweight,CORE,Maintain steady breathing and controlled trunk positioning.
+Bodyweight Bird Dog,Core,Bodyweight,CORE,Maintain steady breathing and controlled trunk positioning.
+Bodyweight Hollow Hold,Core,Bodyweight,CORE,Maintain steady breathing and controlled trunk positioning.
+Bodyweight Reverse Crunch,Core,Bodyweight,CORE,Maintain steady breathing and controlled trunk positioning.
+Bodyweight Bicycle Crunch,Core,Bodyweight,CORE,Maintain steady breathing and controlled trunk positioning.
+Bodyweight Mountain Climber,Core,Bodyweight,CORE,Maintain steady breathing and controlled trunk positioning.
+Bodyweight Leg Raise,Core,Bodyweight,CORE,Maintain steady breathing and controlled trunk positioning.
+Bodyweight V Up,Core,Bodyweight,CORE,Maintain steady breathing and controlled trunk positioning.
+Dumbbell Russian Twist,Core,Dumbbell,CORE,Maintain steady breathing and controlled trunk positioning.
+Dumbbell Sit Up,Core,Dumbbell,CORE,Maintain steady breathing and controlled trunk positioning.
+Dumbbell Side Bend,Core,Dumbbell,CORE,Maintain steady breathing and controlled trunk positioning.
+Kettlebell Halo,Core,Kettlebell,CORE,Maintain steady breathing and controlled trunk positioning.
+Kettlebell Windmill,Core,Kettlebell,CORE,Maintain steady breathing and controlled trunk positioning.
+Resistance Band Pallof Press,Core,Resistance Band,CORE,Maintain steady breathing and controlled trunk positioning.
+Resistance Band Wood Chop,Core,Resistance Band,CORE,Maintain steady breathing and controlled trunk positioning.
+Cable Crunch,Core,Cable,CORE,Maintain steady breathing and controlled trunk positioning.
+Cable Pallof Press,Core,Cable,CORE,Maintain steady breathing and controlled trunk positioning.
+Cable Wood Chop,Core,Cable,CORE,Maintain steady breathing and controlled trunk positioning.
+Cable Reverse Wood Chop,Core,Cable,CORE,Maintain steady breathing and controlled trunk positioning.
+Machine Abdominal Crunch,Core,Machine,CORE,Maintain steady breathing and controlled trunk positioning.
+Machine Torso Rotation,Core,Machine,CORE,Maintain steady breathing and controlled trunk positioning.
+Barbell Suitcase Carry,Core,Barbell,CARRY,Move with stable posture and a controlled pace.
+Barbell Overhead Carry,Shoulders,Barbell,CARRY,Move with stable posture and a controlled pace.
+Dumbbell Farmers Carry,Forearms,Dumbbell,CARRY,Move with stable posture and a controlled pace.
+Dumbbell Suitcase Carry,Core,Dumbbell,CARRY,Move with stable posture and a controlled pace.
+Dumbbell Overhead Carry,Shoulders,Dumbbell,CARRY,Move with stable posture and a controlled pace.
+Dumbbell Front Rack Carry,Core,Dumbbell,CARRY,Move with stable posture and a controlled pace.
+Kettlebell Farmers Carry,Forearms,Kettlebell,CARRY,Move with stable posture and a controlled pace.
+Kettlebell Suitcase Carry,Core,Kettlebell,CARRY,Move with stable posture and a controlled pace.
+Kettlebell Rack Carry,Core,Kettlebell,CARRY,Move with stable posture and a controlled pace.
+Kettlebell Overhead Carry,Shoulders,Kettlebell,CARRY,Move with stable posture and a controlled pace.
+Bodyweight Bear Crawl,Core,Bodyweight,CARRY,Move with stable posture and a controlled pace.
+Bodyweight Crab Walk,Core,Bodyweight,CARRY,Move with stable posture and a controlled pace.
+Resistance Band Lateral Walk,Glutes,Resistance Band,CARRY,Move with stable posture and a controlled pace.
+Barbell Biceps Curl,Biceps,Barbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Barbell Preacher Curl,Biceps,Barbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Barbell Skull Crusher,Triceps,Barbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Barbell Upright Row,Shoulders,Barbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Dumbbell Biceps Curl,Biceps,Dumbbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Dumbbell Hammer Curl,Biceps,Dumbbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Dumbbell Concentration Curl,Biceps,Dumbbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Dumbbell Incline Curl,Biceps,Dumbbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Dumbbell Lateral Raise,Shoulders,Dumbbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Dumbbell Front Raise,Shoulders,Dumbbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Dumbbell Rear Delt Fly,Shoulders,Dumbbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Dumbbell Triceps Extension,Triceps,Dumbbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Dumbbell Triceps Kickback,Triceps,Dumbbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Dumbbell Calf Raise,Calves,Dumbbell,ISOLATION,Use a controlled range of motion for the target muscle.
+Bodyweight Calf Raise,Calves,Bodyweight,ISOLATION,Use a controlled range of motion for the target muscle.
+Bodyweight Single Leg Calf Raise,Calves,Bodyweight,ISOLATION,Use a controlled range of motion for the target muscle.
+Bodyweight Nordic Curl,Hamstrings,Bodyweight,ISOLATION,Use a controlled range of motion for the target muscle.
+Bodyweight Superman,Back,Bodyweight,ISOLATION,Use a controlled range of motion for the target muscle.
+Resistance Band Biceps Curl,Biceps,Resistance Band,ISOLATION,Use a controlled range of motion for the target muscle.
+Resistance Band Triceps Extension,Triceps,Resistance Band,ISOLATION,Use a controlled range of motion for the target muscle.
+Resistance Band Lateral Raise,Shoulders,Resistance Band,ISOLATION,Use a controlled range of motion for the target muscle.
+Resistance Band Pull Apart,Shoulders,Resistance Band,ISOLATION,Use a controlled range of motion for the target muscle.
+Resistance Band Leg Curl,Hamstrings,Resistance Band,ISOLATION,Use a controlled range of motion for the target muscle.
+Resistance Band Glute Kickback,Glutes,Resistance Band,ISOLATION,Use a controlled range of motion for the target muscle.
+Cable Biceps Curl,Biceps,Cable,ISOLATION,Use a controlled range of motion for the target muscle.
+Cable Hammer Curl,Biceps,Cable,ISOLATION,Use a controlled range of motion for the target muscle.
+Cable Triceps Pushdown,Triceps,Cable,ISOLATION,Use a controlled range of motion for the target muscle.
+Cable Overhead Triceps Extension,Triceps,Cable,ISOLATION,Use a controlled range of motion for the target muscle.
+Cable Lateral Raise,Shoulders,Cable,ISOLATION,Use a controlled range of motion for the target muscle.
+Cable Chest Fly,Chest,Cable,ISOLATION,Use a controlled range of motion for the target muscle.
+Cable Rear Delt Fly,Shoulders,Cable,ISOLATION,Use a controlled range of motion for the target muscle.
+Cable Glute Kickback,Glutes,Cable,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Leg Extension,Quadriceps,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Seated Leg Curl,Hamstrings,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Lying Leg Curl,Hamstrings,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Pec Deck,Chest,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Reverse Pec Deck,Shoulders,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Biceps Curl,Biceps,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Triceps Extension,Triceps,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Seated Calf Raise,Calves,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Standing Calf Raise,Calves,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Hip Abduction,Glutes,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Hip Adduction,Adductors,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+Machine Glute Kickback,Glutes,Machine,ISOLATION,Use a controlled range of motion for the target muscle.

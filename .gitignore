@@ -1,0 +1,122 @@
+
+# ==========================================
+# JAVA / SPRING BOOT / GRADLE
+# ==========================================
+
+# Gradle build output and local caches
+.gradle/
+build/
+**/build/
+
+# Java compiled files
+*.class
+
+# Generated Java archives
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.war
+*.ear
+
+# Java crash logs
+hs_err_pid*
+replay_pid*
+
+# ==========================================
+# REACT / NODE.JS / VITE
+# ==========================================
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Frontend build output
+frontend/dist/
+frontend/build/
+frontend/coverage/
+
+# Vite caches
+frontend/node_modules/.vite/
+*.tsbuildinfo
+
+# npm cache and debug logs
+.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================================
+# INTELLIJ IDEA / VS CODE
+# ==========================================
+
+# IntelliJ local project configuration
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# VS Code local workspace configuration
+.vscode/
+
+# Eclipse IDE files
+.project
+.classpath
+.settings/
+
+# ==========================================
+# ENVIRONMENT VARIABLES / SECRETS
+# ==========================================
+
+# Local environment configuration
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Private credentials
+*.pem
+*.key
+*.p12
+*.pfx
+
+# ==========================================
+# POSTGRESQL / DOCKER
+# ==========================================
+
+# Local database dumps and backups
+*.sql.gz
+*.dump
+*.backup
+
+# Local PostgreSQL data directory
+postgres_data/
+pgdata/
+
+# ==========================================
+# LOGS / TEMPORARY FILES
+# ==========================================
+
+# Application logs
+*.log
+logs/
+tmp/
+temp/
+
+# ==========================================
+# OPERATING SYSTEM FILES
+# ==========================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+__MACOSX/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux / editor temporary files
+*~
+*.swp
+*.swo

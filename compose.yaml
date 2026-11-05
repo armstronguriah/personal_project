@@ -1,0 +1,15 @@
+services:
+  postgres-db:
+    image: postgres
+    container_name: workout-postgres
+    environment:
+      POSTGRES_DB: workout_generator
+      POSTGRES_USER: workout_user
+      POSTGRES_PASSWORD: workoutpassword
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - workout_pgdata:/var/lib/postgresql/data
+
+volumes:
+  workout_pgdata:

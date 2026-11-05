@@ -1,0 +1,48 @@
+
+#root {
+  width: 100%;
+}
+
+.app-shell {
+  min-height: 100vh;
+}
+
+.app-header {
+  background: #ffffff;
+  border-bottom: 1px solid #dddddd;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.nav-link {
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #333333;
+  border-radius: 6px;
+}
+
+.nav-link:hover {
+  background: #eeeeee;
+}
+
+.nav-link.active {
+  background: #e4eaff;
+  color: #2445a5;
+  font-weight: 600;
+}
+
+.page-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
