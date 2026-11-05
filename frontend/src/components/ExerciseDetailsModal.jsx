@@ -126,7 +126,6 @@ export default function ExerciseDetailsModal({
     // STEP 2: Fetch full details when an exercise is selected
     useEffect(() => {
         if (!selectedId) {
-            setDetailedExercise(null);
             return;
         }
 

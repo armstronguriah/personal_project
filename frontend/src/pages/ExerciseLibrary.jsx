@@ -205,7 +205,7 @@ function ExerciseLibrary() {
                 if (!controller.signal.aborted) {
                     setExercises(data);
                 }
-            } catch (error) {
+            } catch {
                 if (!controller.signal.aborted) {
                     setError('Unable to load exercises.');
                 }

@@ -72,28 +72,30 @@ function WorkoutSetupForm() {
     const [isSaving, setIsSaving] = useState(false);
     const [saveError, setSaveError] = useState('');
     const [savedProgramId, setSavedProgramId] = useState(null);
-    const [draftStorageError, setDraftStorageError] = useState('');
 
     // Automatically back up any unsaved program, including swaps and week selection.
     useEffect(() => {
         try {
             if (generatedSchedule === null || requestPreview === null || savedProgramId !== null) {
                 localStorage.removeItem(DRAFT_STORAGE_KEY);
-                setDraftStorageError('');
                 return;
             }
 
-            localStorage.setItem(DRAFT_STORAGE_KEY, JSON.stringify({
+            const draft = {
                 preferences,
                 requestPreview,
                 generatedSchedule,
                 programName,
                 previewWeek
-            }));
-            setDraftStorageError('');
+            };
+
+            localStorage.setItem(
+                DRAFT_STORAGE_KEY,
+                JSON.stringify(draft)
+            )
+
         } catch (error) {
             console.error('Unable to store workout draft:', error);
-            setDraftStorageError('Browser draft backup is unavailable. Save the program before leaving this page.');
         }
     }, [preferences, requestPreview, generatedSchedule, programName, previewWeek, savedProgramId]);
 
@@ -217,7 +219,8 @@ function WorkoutSetupForm() {
         setSaveError('');
         // Preserve the previous draft until the new generation succeeds.
 
-        const {equipmentAccess, ...requestFields} = preferences;
+        const requestFields = { ...preferences };
+        delete requestFields.equipmentAccess;
 
         const request = {
             ...requestFields,
@@ -682,11 +685,6 @@ function WorkoutSetupForm() {
                                 ? 'Your draft is automatically backed up in this browser. You can navigate away and return without losing your swaps, name, or selected week.'
                                 : 'This program has been saved to My Programs.'}
                         </p>
-                        {draftStorageError && (
-                            <p role="alert" className="mt-2 text-sm font-medium text-red-700">
-                                {draftStorageError}
-                            </p>
-                        )}
                     </div>
 
                     {/* Generated Workouts */}

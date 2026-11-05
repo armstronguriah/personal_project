@@ -41,16 +41,15 @@ export default function GeneratedWorkout({
     );
 
 // Keep the selected week valid if a new schedule loads.
-    useEffect(() => {
-        setActiveWeek((previous) =>
-            Math.min(previous, Math.max(1, totalWeeks))
-        );
-    }, [totalWeeks]);
+    const safeActiveWeek = Math.min(
+        Math.max(1, activeWeek),
+        Math.max(1, totalWeeks)
+    );
 
 // Show only workouts belonging to the selected week.
     const visibleSchedule = schedule.slice(
-        (activeWeek - 1) * daysPerWeek,
-        activeWeek * daysPerWeek
+        (safeActiveWeek - 1) * daysPerWeek,
+        safeActiveWeek * daysPerWeek
     );
 
 
@@ -210,7 +209,7 @@ export default function GeneratedWorkout({
                 <div className="space-y-4">
                     <div className="flex flex-wrap items-center justify-between gap-3">
                         <h3 className="text-lg font-semibold text-slate-900">
-                            Week {activeWeek} of {totalWeeks}
+                            Week {safeActiveWeek} of {totalWeeks}
                         </h3>
 
                         <span className={ui.badge}>
@@ -231,10 +230,10 @@ export default function GeneratedWorkout({
                                 type="button"
                                 onClick={() => setActiveWeek(week)}
                                 aria-current={
-                                    activeWeek === week ? 'step' : undefined
+                                    safeActiveWeek === week ? 'step' : undefined
                                 }
                                 className={
-                                    activeWeek === week
+                                    safeActiveWeek === week
                                         ? 'rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white'
                                         : 'rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-slate-600 transition hover:border-blue-300 hover:bg-blue-50'
                                 }

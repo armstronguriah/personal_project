@@ -87,9 +87,6 @@ export default function ExerciseTable({
 
                         <tbody className="divide-y divide-slate-100 bg-white">
                         {exercises.map((exercise) => {
-                            const isDeleting =
-                                deletingId === exercise.id;
-
                             return (
                                 <tr
                                     key={exercise.id}
