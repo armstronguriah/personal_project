@@ -7,6 +7,8 @@ export default function WorkoutSetupForm({
     preferences,
     equipmentError,
     isGenerating,
+    resetDisabled,
+    onReset,
     onSubmit,
     onChange,
     onEquipmentAccessChange,
@@ -354,15 +356,24 @@ export default function WorkoutSetupForm({
                     Your program will be generated based on these preferences.
                 </p>
 
-                <button
-                    type="submit"
-                    disabled={isGenerating}
-                    className={ui.primaryButton}
-                >
-                    {isGenerating
-                        ? 'Generating...'
-                        : 'Generate Program'}
-                </button>
+                <div className="flex flex-wrap items-center gap-3">
+                    <button
+                        type="button"
+                        onClick={onReset}
+                        disabled={resetDisabled}
+                        className={ui.secondaryButton}
+                    >
+                        Reset Form
+                    </button>
+
+                    <button
+                        type="submit"
+                        disabled={isGenerating}
+                        className={ui.primaryButton}
+                    >
+                        {isGenerating ? 'Generating...' : 'Generate Program'}
+                    </button>
+                </div>
             </div>
         </form>
     );

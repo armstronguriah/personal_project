@@ -205,6 +205,32 @@ export default function GenerateProgram() {
         setSaveError('');
     }
 
+    function handleResetForm() {
+        if (isGenerating || isSaving) return;
+
+        const confirmed = window.confirm(
+            'Reset the form and discard your unsaved workout draft?'
+        );
+
+        if (!confirmed) return;
+
+        localStorage.removeItem(DRAFT_STORAGE_KEY);
+
+        setPreferences({
+            ...DEFAULT_PREFERENCES,
+            availableEquipment: []
+        });
+
+        setEquipmentError('');
+        setRequestPreview(null);
+        setPreviewWeek(1);
+        setGeneratedSchedule(null);
+        setGenerationError('');
+        setProgramName('');
+        setSaveError('');
+        setSavedProgramId(null);
+    }
+
 
     // Generate the workout program
     async function handleSubmit(event) {
@@ -302,6 +328,8 @@ export default function GenerateProgram() {
                 onChange={handleChange}
                 onEquipmentAccessChange={handleEquipmentAccessChange}
                 onEquipmentToggle={handleEquipmentToggle}
+                resetDisabled={isGenerating || isSaving}
+                onReset={handleResetForm}
             />
 
             {/* Request Preview */}
