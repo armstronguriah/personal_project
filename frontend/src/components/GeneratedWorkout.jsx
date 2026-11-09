@@ -285,7 +285,14 @@ export default function GeneratedWorkout({
                             </p>
                         ) : (
                             <div className="overflow-x-auto">
-                                <table className="w-full border-collapse">
+                                <table className="w-full min-w-[900px] table-fixed border-collapse">
+                                    <colgroup>
+                                        <col className="w-[34%]" />
+                                        <col className="w-[9%]" />
+                                        <col className="w-[9%]" />
+                                        <col className="w-[21%]" />
+                                        <col className="w-[27%]" />
+                                    </colgroup>
 
                                     <thead>
                                     <tr>
