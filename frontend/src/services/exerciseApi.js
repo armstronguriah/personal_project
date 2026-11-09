@@ -76,3 +76,28 @@ export async function deleteExercise(id) {
     }
 }
 
+
+// Local exercise detail and ExerciseDB proxy endpoints.
+export async function getExerciseById(exerciseId, signal) {
+    const response = await fetch(`/api/exercises/${exerciseId}`, {signal});
+    if (!response.ok) throw new Error('Unable to load exercise information.');
+    return response.json();
+}
+
+export async function findExternalExerciseMatches(exerciseId, signal) {
+    const response = await fetch(`/api/exercises/${exerciseId}/external-matches`, {signal});
+    if (!response.ok) throw new Error('Unable to search ExerciseDB. Please try again.');
+    const results = await response.json();
+    if (!Array.isArray(results)) throw new Error('Unexpected ExerciseDB search response.');
+    return results;
+}
+
+export async function getExternalExerciseDetails(externalId, signal) {
+    const response = await fetch(`/api/exercises/external/${encodeURIComponent(externalId)}`, {signal});
+    if (!response.ok) throw new Error('Unable to load the selected exercise details.');
+    const result = await response.json();
+    if (!result || result.exerciseId !== externalId) {
+        throw new Error('ExerciseDB returned unexpected exercise details.');
+    }
+    return result;
+}

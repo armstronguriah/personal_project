@@ -1,12 +1,14 @@
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import {ui} from '../styles/ui';
-import {formatWorkoutPrescription, isCardioExercise} from '../utils/workoutPrescription';
+import {getSavedPrograms, setSessionCompletion} from '../services/programApi';
+import {getSessionLogs, saveResistanceSets, saveCardioNotes} from '../services/workoutLogApi';
+import {isCardioExercise} from '../utils/workoutPrescription';
+import {entryKey} from '../utils/workoutLog';
+import {formatWorkoutType} from '../utils/formatters';
+import WorkoutSelector from '../components/WorkoutSelector';
+import WorkoutExerciseLog from '../components/WorkoutExerciseLog';
 
-
-function entryKey(exerciseId, setNumber) {
-    return `${exerciseId}:${setNumber}`;
-}
 
 function entriesFromLogs(logs) {
     const entries = {};
@@ -22,13 +24,6 @@ function entriesFromLogs(logs) {
     }
 
     return entries;
-}
-
-function formatLabel(value) {
-    return (value ?? '')
-        .replaceAll('_', ' ')
-        .toLowerCase()
-        .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
 export default function WorkoutTracker() {
@@ -56,19 +51,7 @@ export default function WorkoutTracker() {
 
         async function loadPrograms() {
             try {
-                const response = await fetch('/api/programs/saved', {
-                    signal: controller.signal
-                });
-
-                if (!response.ok) {
-                    throw new Error('Unable to load saved programs.');
-                }
-
-                const data = await response.json();
-
-                if (!Array.isArray(data)) {
-                    throw new Error('Unexpected program response.');
-                }
+                const data = await getSavedPrograms(controller.signal);
 
                 if (controller.signal.aborted) return;
 
@@ -139,24 +122,9 @@ export default function WorkoutTracker() {
             setMessage('');
 
             try {
-                const baseUrl = `/api/programs/saved/${programId}/sessions/${sessionNumber}`;
-                const [setsResponse, notesResponse] = await Promise.all([
-                    fetch(`${baseUrl}/sets`, { signal: controller.signal }),
-                    fetch(`${baseUrl}/cardio-notes`, { signal: controller.signal })
-                ]);
-
-                if (!setsResponse.ok || !notesResponse.ok) {
-                    throw new Error('Unable to load workout log.');
-                }
-
-                const [logs, notes] = await Promise.all([
-                    setsResponse.json(),
-                    notesResponse.json()
-                ]);
-
-                if (!Array.isArray(logs) || !notes || Array.isArray(notes) || typeof notes !== 'object') {
-                    throw new Error('Unexpected workout log response.');
-                }
+                const {sets: logs, notes} = await getSessionLogs(
+                    programId, sessionNumber, controller.signal
+                );
 
                 if (!controller.signal.aborted) {
                     setEntries(entriesFromLogs(logs));
@@ -321,22 +289,7 @@ export default function WorkoutTracker() {
         setSaving(true);
 
         try {
-            const response = await fetch(
-                `/api/programs/saved/${programId}/sessions/${sessionNumber}/sets`,
-                {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({sets})
-                }
-            );
-
-            if (!response.ok) {
-                throw new Error('Unable to save workout log.');
-            }
-
-            const savedLogs = await response.json();
+            const savedLogs = await saveResistanceSets(programId, sessionNumber, sets);
 
             // Only save notes for cardio exercises still present in the session.
             // This also handles an exercise that was swapped after an earlier log.
@@ -352,20 +305,9 @@ export default function WorkoutTracker() {
             );
 
             // Cardio notes are stored independently from weight-and-rep sets.
-            const notesResponse = await fetch(
-                `/api/programs/saved/${programId}/sessions/${sessionNumber}/cardio-notes`,
-                {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ notes: activeCardioNotes })
-                }
+            const savedNotes = await saveCardioNotes(
+                programId, sessionNumber, activeCardioNotes
             );
-
-            if (!notesResponse.ok) {
-                throw new Error('Set logs saved, but cardio notes could not be saved. Try saving again.');
-            }
-
-            const savedNotes = await notesResponse.json();
             setEntries(entriesFromLogs(savedLogs));
             setCardioNotes(savedNotes);
             setDirty(false);
@@ -388,18 +330,9 @@ export default function WorkoutTracker() {
         setMessage('');
 
         try {
-            const response = await fetch(
-                `/api/programs/saved/${programId}/sessions/${sessionNumber}/completion`,
-                {
-                    method: isCompleted ? 'DELETE' : 'PUT'
-                }
+            const updatedProgram = await setSessionCompletion(
+                programId, sessionNumber, !isCompleted
             );
-
-            if (!response.ok) {
-                throw new Error('Unable to update workout completion.');
-            }
-
-            const updatedProgram = await response.json();
 
             setPrograms((previous) =>
                 previous.map((program) =>
@@ -483,98 +416,18 @@ export default function WorkoutTracker() {
             ) : (
                 <>
                     {/* Program Selector */}
-                    <section className={`${ui.card} space-y-5`}>
-                        <div>
-                            <h2 className="text-lg font-semibold text-slate-900">
-                                Select Your Workout
-                            </h2>
-                            <p className="mt-1 text-sm text-slate-500">
-                                Choose a program, week, and session to log.
-                            </p>
-                        </div>
-
-                        <div>
-                            <label htmlFor="tracker-program" className={ui.label}>
-                                Saved Program
-                            </label>
-
-                            <select
-                                id="tracker-program"
-                                value={programId}
-                                onChange={handleProgramChange}
-                                disabled={saving}
-                                className={ui.input}
-                            >
-                                {programs.map((program) => (
-                                    <option key={program.id} value={program.id}>
-                                        {program.name}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-
-                        {/* Week Navigation */}
-                        {totalWeeks > 1 && (
-                            <div>
-                                <h3 className={ui.label}>Training Week</h3>
-
-                                <div
-                                    role="group"
-                                    aria-label="Training week"
-                                    className="flex flex-wrap gap-2"
-                                >
-                                    {Array.from(
-                                        {length: totalWeeks},
-                                        (_, index) => index + 1
-                                    ).map((weekNumber) => (
-                                        <button
-                                            key={weekNumber}
-                                            type="button"
-                                            disabled={saving}
-                                            onClick={() =>
-                                                handleWeekChange(weekNumber)
-                                            }
-                                            aria-pressed={week === weekNumber}
-                                            className={
-                                                week === weekNumber
-                                                    ? ui.primaryButton
-                                                    : ui.secondaryButton
-                                            }
-                                        >
-                                            Week {weekNumber}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Session Navigation */}
-                        <div>
-                            <h3 className={ui.label}>Workout Session</h3>
-
-                            <div className="flex flex-wrap gap-2">
-                                {weekSessions.map((session, index) => (
-                                    <button
-                                        key={session.sessionNumber}
-                                        type="button"
-                                        disabled={saving}
-                                        onClick={() =>
-                                            handleSessionChange(session.sessionNumber)
-                                        }
-                                        className={
-                                            session.sessionNumber === sessionNumber
-                                                ? ui.primaryButton
-                                                : ui.secondaryButton
-                                        }
-                                    >
-                                        Day {index + 1} — {
-                                        formatLabel(session.workoutType)
-                                    }
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
+                    <WorkoutSelector
+                        programs={programs}
+                        programId={programId}
+                        onProgramChange={handleProgramChange}
+                        saving={saving}
+                        totalWeeks={totalWeeks}
+                        week={week}
+                        onWeekChange={handleWeekChange}
+                        weekSessions={weekSessions}
+                        sessionNumber={sessionNumber}
+                        onSessionChange={handleSessionChange}
+                    />
 
                     {/* Selected Session */}
                     {activeSession && (
@@ -585,7 +438,7 @@ export default function WorkoutTracker() {
                                     <h2 className="text-xl font-bold text-slate-900">
                                         Session {activeSession.sessionNumber}
                                         {' — '}
-                                        {formatLabel(activeSession.workoutType)}
+                                        {formatWorkoutType(activeSession.workoutType)}
                                     </h2>
 
                                     <p className="mt-1 text-sm text-slate-500">
@@ -612,168 +465,14 @@ export default function WorkoutTracker() {
 
                             {logsReady && activeSession.exercises.map(
                                 (exercise) => (
-                                    <article
+                                    <WorkoutExerciseLog
                                         key={exercise.exerciseId}
-                                        className={`${ui.card} space-y-5`}
-                                    >
-                                        {/* Exercise Heading */}
-                                        <div className="flex flex-wrap items-start justify-between gap-3">
-                                            <div>
-                                                <h3 className="text-lg font-bold text-slate-900">
-                                                    {exercise.exerciseName}
-                                                </h3>
-
-                                                <p className="mt-1 text-sm text-slate-500">
-                                                    {formatWorkoutPrescription(exercise)}
-                                                </p>
-                                            </div>
-
-                                            <span className={ui.badge}>
-                                                Target RPE: {
-                                                exercise.targetRpe ?? '—'
-                                            }
-                                             </span>
-                                        </div>
-
-                                        {isCardioExercise(exercise) && (
-                                            <div className="space-y-2">
-                                                <label
-                                                    htmlFor={`cardio-notes-${exercise.exerciseId}`}
-                                                    className={ui.label}
-                                                >
-                                                    Cardio Notes
-                                                </label>
-                                                <textarea
-                                                    id={`cardio-notes-${exercise.exerciseId}`}
-                                                    rows={3}
-                                                    maxLength={1000}
-                                                    value={cardioNotes[exercise.exerciseId] ?? ''}
-                                                    onChange={(event) =>
-                                                        handleCardioNotesChange(exercise.exerciseId, event.target.value)
-                                                    }
-                                                    placeholder="Distance, pace, intervals completed, how you felt..."
-                                                    className={`${ui.input} w-full resize-y`}
-                                                />
-                                                <p className="text-xs text-slate-500">
-                                                    Save Workout Log to keep this note. {String(cardioNotes[exercise.exerciseId] ?? '').length}/1000 characters.
-                                                </p>
-                                            </div>
-                                        )}
-
-                                        {/* Set Entry Table — resistance exercises only */}
-                                        {!isCardioExercise(exercise) && (
-                                            <div className="overflow-x-auto">
-                                                <table className="w-full min-w-[500px] border-collapse">
-
-                                                    <thead>
-                                                    <tr>
-                                                        <th className={ui.tableHeader}>
-                                                            Set
-                                                        </th>
-
-                                                        <th className={ui.tableHeader}>
-                                                            Weight (lb)
-                                                        </th>
-
-                                                        <th className={ui.tableHeader}>
-                                                            Reps
-                                                        </th>
-
-                                                        <th className={ui.tableHeader}>
-                                                            Actual RPE
-                                                        </th>
-                                                    </tr>
-                                                    </thead>
-
-                                                    <tbody>
-                                                    {Array.from(
-                                                        {length: exercise.sets},
-                                                        (_, index) => index + 1
-                                                    ).map((setNumber) => {
-                                                        const key = entryKey(
-                                                            exercise.exerciseId,
-                                                            setNumber
-                                                        );
-
-                                                        const entry = entries[key] ?? {
-                                                            weightLb: '',
-                                                            reps: String(exercise.reps),
-                                                            actualRpe: ''
-                                                        };
-
-                                                        return (
-                                                            <tr key={setNumber}>
-                                                                <td className={ui.tableCell}>
-                                                                    {setNumber}
-                                                                </td>
-
-                                                                <td className={ui.tableCell}>
-                                                                    <input
-                                                                        type="number"
-                                                                        min="0"
-                                                                        step="any"
-                                                                        value={entry.weightLb}
-                                                                        aria-label={`${exercise.exerciseName} set ${setNumber} weight`}
-                                                                        onChange={(event) =>
-                                                                            handleEntryChange(
-                                                                                exercise,
-                                                                                setNumber,
-                                                                                'weightLb',
-                                                                                event.target.value
-                                                                            )
-                                                                        }
-                                                                        className={`${ui.input} min-w-24`}
-                                                                        placeholder="0"
-                                                                    />
-                                                                </td>
-
-                                                                <td className={ui.tableCell}>
-                                                                    <input
-                                                                        type="number"
-                                                                        min="1"
-                                                                        step="1"
-                                                                        value={entry.reps}
-                                                                        aria-label={`${exercise.exerciseName} set ${setNumber} reps`}
-                                                                        onChange={(event) =>
-                                                                            handleEntryChange(
-                                                                                exercise,
-                                                                                setNumber,
-                                                                                'reps',
-                                                                                event.target.value
-                                                                            )
-                                                                        }
-                                                                        className={`${ui.input} min-w-20`}
-                                                                    />
-                                                                </td>
-
-                                                                <td className={ui.tableCell}>
-                                                                    <input
-                                                                        type="number"
-                                                                        min="1"
-                                                                        max="10"
-                                                                        step="0.5"
-                                                                        value={entry.actualRpe}
-                                                                        aria-label={`${exercise.exerciseName} set ${setNumber} actual RPE`}
-                                                                        onChange={(event) =>
-                                                                            handleEntryChange(
-                                                                                exercise,
-                                                                                setNumber,
-                                                                                'actualRpe',
-                                                                                event.target.value
-                                                                            )
-                                                                        }
-                                                                        className={`${ui.input} min-w-20`}
-                                                                        placeholder="Optional"
-                                                                    />
-                                                                </td>
-                                                            </tr>
-                                                        );
-                                                    })}
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        )}
-                                    </article>
+                                        exercise={exercise}
+                                        entries={entries}
+                                        cardioNotes={cardioNotes}
+                                        onEntryChange={handleEntryChange}
+                                        onCardioNotesChange={handleCardioNotesChange}
+                                    />
                                 )
                             )}
 

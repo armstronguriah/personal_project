@@ -1,6 +1,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { ui } from '../styles/ui';
+import { findExternalExerciseMatches, getExternalExerciseDetails } from '../services/exerciseApi';
 
 // Normalize names for exact-match comparisons
 function normalizeName(name) {
@@ -73,24 +74,10 @@ export default function ExerciseDetailsModal({
             setDetailedExercise(null);
 
             try {
-                const response = await fetch(
-                    `/api/exercises/${exercise.id}/external-matches`,
-                    {
-                        signal: controller.signal
-                    }
+                const results = await findExternalExerciseMatches(
+                    exercise.id,
+                    controller.signal
                 );
-
-                if (!response.ok) {
-                    throw new Error(
-                        'Unable to search ExerciseDB. Please try again.'
-                    );
-                }
-
-                const results = await response.json();
-
-                if (!Array.isArray(results)) {
-                    throw new Error('Unexpected ExerciseDB search response.');
-                }
 
                 if (controller.signal.aborted) return;
 
@@ -137,29 +124,10 @@ export default function ExerciseDetailsModal({
             setDetailedExercise(null);
 
             try {
-                const response = await fetch(
-                    `/api/exercises/external/${encodeURIComponent(selectedId)}`,
-                    {
-                        signal: controller.signal
-                    }
+                const result = await getExternalExerciseDetails(
+                    selectedId,
+                    controller.signal
                 );
-
-                if (!response.ok) {
-                    throw new Error(
-                        'Unable to load the selected exercise details.'
-                    );
-                }
-
-                const result = await response.json();
-
-                if (
-                    !result ||
-                    result.exerciseId !== selectedId
-                ) {
-                    throw new Error(
-                        'ExerciseDB returned unexpected exercise details.'
-                    );
-                }
 
                 if (!controller.signal.aborted) {
                     setDetailedExercise(result);

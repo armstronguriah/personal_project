@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getExercises } from '../services/exerciseApi';
+import { getSavedPrograms } from '../services/programApi';
 import { ui } from '../styles/ui';
 
 function formatLabel(value) {
@@ -34,18 +35,10 @@ export default function Dashboard() {
 
         async function loadDashboard() {
             try {
-                const [programResponse, exercises] = await Promise.all([
-                    fetch('/api/programs/saved', {
-                        signal: controller.signal
-                    }),
+                const [savedPrograms, exercises] = await Promise.all([
+                    getSavedPrograms(controller.signal),
                     getExercises({}, controller.signal)
                 ]);
-
-                if (!programResponse.ok) {
-                    throw new Error('Unable to load saved programs.');
-                }
-
-                const savedPrograms = await programResponse.json();
 
                 if (!Array.isArray(savedPrograms) ||
                     !Array.isArray(exercises)) {

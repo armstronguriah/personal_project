@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import ExerciseSwapModal from './ExerciseSwapModal';
 import ExerciseDetailsModal from './ExerciseDetailsModal';
 import {ui} from '../styles/ui';
+import { getExerciseById } from '../services/exerciseApi';
 import {formatWorkoutPrescription, isCardioExercise} from '../utils/workoutPrescription';
 
 function formatWorkoutType(type) {
@@ -68,20 +69,10 @@ export default function GeneratedWorkout({
             setSelectedExercise(null);
 
             try {
-                const response = await fetch(
-                    `/api/exercises/${viewingExerciseId}`,
-                    {
-                        signal: controller.signal
-                    }
+                const exercise = await getExerciseById(
+                    viewingExerciseId,
+                    controller.signal
                 );
-
-                if (!response.ok) {
-                    throw new Error(
-                        'Unable to load exercise information.'
-                    );
-                }
-
-                const exercise = await response.json();
 
                 if (!controller.signal.aborted) {
                     setSelectedExercise(exercise);
