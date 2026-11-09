@@ -50,6 +50,10 @@ public class SavedProgram {
     )
     private List<WorkoutSetLog> workoutSetLogs = new ArrayList<>();
 
+    // Remove cardio notes when the parent saved program is deleted.
+    @OneToMany(mappedBy = "savedProgram", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<CardioNote> cardioNotes = new ArrayList<>();
+
 
     public SavedProgram(
             String name,

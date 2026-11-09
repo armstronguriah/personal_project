@@ -81,8 +81,28 @@ public final class PeriodizationPlanner {
     private static WorkoutExercise applyCardio(WorkoutExercise exercise, int week, String experience) {
         boolean deload = week == 4 || week == 8;
         boolean beginner = "BEGINNER".equalsIgnoreCase(experience);
-        double rpe = deload ? 5.0 : Math.min(beginner ? 7.0 : 8.0,
-                6.0 + Math.min(2, (week - 1) % 4) * 0.5);
+        boolean intervals = "INTERVALS".equals(
+                exercise.prescriptionType()
+        );
+
+        int progressionWeek = (week - 1) % 4;
+
+        double rpe;
+
+        if (deload) {
+            rpe = 5.0;
+        } else if (intervals) {
+            // Higher effort for sprint and interval training
+            rpe = 7.5 + progressionWeek * 0.5;
+        } else {
+            // Moderate effort for steady-state cardio
+            rpe = 5.5 + progressionWeek * 0.5;
+        }
+
+// Limit intensity for beginners
+        if (beginner) {
+            rpe = Math.min(rpe, 7.5);
+        }
 
         if ("DURATION".equals(exercise.prescriptionType())) {
             int base = exercise.durationMinutes();

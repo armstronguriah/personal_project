@@ -38,6 +38,7 @@ export default function WorkoutTracker() {
     const [sessionNumber, setSessionNumber] = useState(null);
 
     const [entries, setEntries] = useState({});
+    const [cardioNotes, setCardioNotes] = useState({});
     const [loading, setLoading] = useState(true);
     const [loadingLogs, setLoadingLogs] = useState(false);
     const [logsReady, setLogsReady] = useState(false);
@@ -132,30 +133,34 @@ export default function WorkoutTracker() {
             setLoadingLogs(true);
             setLogsReady(false);
             setEntries({});
+            setCardioNotes({});
             setDirty(false);
             setError('');
             setMessage('');
 
             try {
-                const response = await fetch(
-                    `/api/programs/saved/${programId}/sessions/${sessionNumber}/sets`,
-                    {
-                        signal: controller.signal
-                    }
-                );
+                const baseUrl = `/api/programs/saved/${programId}/sessions/${sessionNumber}`;
+                const [setsResponse, notesResponse] = await Promise.all([
+                    fetch(`${baseUrl}/sets`, { signal: controller.signal }),
+                    fetch(`${baseUrl}/cardio-notes`, { signal: controller.signal })
+                ]);
 
-                if (!response.ok) {
+                if (!setsResponse.ok || !notesResponse.ok) {
                     throw new Error('Unable to load workout log.');
                 }
 
-                const logs = await response.json();
+                const [logs, notes] = await Promise.all([
+                    setsResponse.json(),
+                    notesResponse.json()
+                ]);
 
-                if (!Array.isArray(logs)) {
+                if (!Array.isArray(logs) || !notes || Array.isArray(notes) || typeof notes !== 'object') {
                     throw new Error('Unexpected workout log response.');
                 }
 
                 if (!controller.signal.aborted) {
                     setEntries(entriesFromLogs(logs));
+                    setCardioNotes(notes);
                     setLogsReady(true);
                 }
             } catch (err) {
@@ -243,6 +248,15 @@ export default function WorkoutTracker() {
         setMessage('');
     }
 
+    function handleCardioNotesChange(exerciseId, value) {
+        setCardioNotes((previous) => ({
+            ...previous,
+            [exerciseId]: value
+        }));
+        setDirty(true);
+        setMessage('');
+    }
+
     // Save all logged sets for the selected session
     async function handleSaveLogs() {
         if (!activeSession || !logsReady || saving) return;
@@ -324,10 +338,39 @@ export default function WorkoutTracker() {
 
             const savedLogs = await response.json();
 
+            // Only save notes for cardio exercises still present in the session.
+            // This also handles an exercise that was swapped after an earlier log.
+            const activeCardioIds = new Set(
+                activeSession.exercises
+                    .filter(isCardioExercise)
+                    .map((exercise) => String(exercise.exerciseId))
+            );
+            const activeCardioNotes = Object.fromEntries(
+                Object.entries(cardioNotes).filter(([exerciseId]) =>
+                    activeCardioIds.has(exerciseId)
+                )
+            );
+
+            // Cardio notes are stored independently from weight-and-rep sets.
+            const notesResponse = await fetch(
+                `/api/programs/saved/${programId}/sessions/${sessionNumber}/cardio-notes`,
+                {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ notes: activeCardioNotes })
+                }
+            );
+
+            if (!notesResponse.ok) {
+                throw new Error('Set logs saved, but cardio notes could not be saved. Try saving again.');
+            }
+
+            const savedNotes = await notesResponse.json();
             setEntries(entriesFromLogs(savedLogs));
+            setCardioNotes(savedNotes);
             setDirty(false);
             setMessage(
-                `Workout log saved. ${savedLogs.length} sets recorded.`
+                `Workout log saved. ${savedLogs.length} resistance sets recorded.`
             );
         } catch (err) {
             setError(err.message);
@@ -400,8 +443,7 @@ export default function WorkoutTracker() {
                 </h1>
 
                 <p className="text-sm text-slate-500">
-                    Record your actual weight, reps, and RPE
-                    for each set of your saved workouts.
+                    Record weight, reps, and RPE for lifting, or add notes about your cardio sessions.
                 </p>
             </div>
 
@@ -594,10 +636,28 @@ export default function WorkoutTracker() {
                                         </div>
 
                                         {isCardioExercise(exercise) && (
-                                            <p className="text-sm text-slate-500">
-                                                Cardio duration and interval results are not logged yet.
-                                                You can still mark this session complete.
-                                            </p>
+                                            <div className="space-y-2">
+                                                <label
+                                                    htmlFor={`cardio-notes-${exercise.exerciseId}`}
+                                                    className={ui.label}
+                                                >
+                                                    Cardio Notes
+                                                </label>
+                                                <textarea
+                                                    id={`cardio-notes-${exercise.exerciseId}`}
+                                                    rows={3}
+                                                    maxLength={1000}
+                                                    value={cardioNotes[exercise.exerciseId] ?? ''}
+                                                    onChange={(event) =>
+                                                        handleCardioNotesChange(exercise.exerciseId, event.target.value)
+                                                    }
+                                                    placeholder="Distance, pace, intervals completed, how you felt..."
+                                                    className={`${ui.input} w-full resize-y`}
+                                                />
+                                                <p className="text-xs text-slate-500">
+                                                    Save Workout Log to keep this note. {String(cardioNotes[exercise.exerciseId] ?? '').length}/1000 characters.
+                                                </p>
+                                            </div>
                                         )}
 
                                         {/* Set Entry Table — resistance exercises only */}
@@ -722,7 +782,7 @@ export default function WorkoutTracker() {
                                 <div className={`${ui.card} space-y-4`}>
                                     {dirty && (
                                         <p className="text-sm font-medium text-amber-700">
-                                            You have unsaved set changes.
+                                            You have unsaved workout log changes.
                                         </p>
                                     )}
 
