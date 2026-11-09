@@ -13,9 +13,3 @@ body {
   min-width: 320px;
 }
 
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}

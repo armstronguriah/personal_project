@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import ExerciseSwapModal from './ExerciseSwapModal';
 import ExerciseDetailsModal from './ExerciseDetailsModal';
 import {ui} from '../styles/ui';
+import {formatWorkoutPrescription, isCardioExercise} from '../utils/workoutPrescription';
 
 function formatWorkoutType(type) {
     return (type ?? '')
@@ -158,9 +159,10 @@ export default function GeneratedWorkout({
                         {schedule.length} training sessions
                     </p>
                     <p className="mt-2 text-xs text-slate-500">
-                        Target RPE indicates how difficult each working set
-                        should feel. RPE 7 ≈ 3 reps remaining;
-                        RPE 8 ≈ 2 reps remaining.
+                        For lifting: target RPE 7 ≈ 3 reps remaining;
+                        RPE 8 ≈ 2, etc.
+                        For cardio: target effort is perceived exertion
+                        on a 1–10 scale.
                     </p>
                 </div>
 
@@ -315,7 +317,7 @@ export default function GeneratedWorkout({
                                         <th
                                             className={`${ui.tableHeader} text-center`}
                                         >
-                                            Target RPE
+                                            Target RPE / Effort
                                         </th>
 
                                         <th
@@ -338,20 +340,26 @@ export default function GeneratedWorkout({
                                                 className={`${ui.tableCell} font-medium text-slate-900`}
                                             >
                                                 {exercise.exerciseName}
+
+                                                {isCardioExercise(exercise) && (
+                                                    <p className="mt-1 text-xs font-normal text-blue-700">
+                                                        {formatWorkoutPrescription(exercise)}
+                                                    </p>
+                                                )}
                                             </td>
 
                                             {/* Sets */}
                                             <td
                                                 className={`${ui.tableCell} text-center tabular-nums`}
                                             >
-                                                {exercise.sets}
+                                                {isCardioExercise(exercise) ? '—' : exercise.sets}
                                             </td>
 
                                             {/* Reps */}
                                             <td
                                                 className={`${ui.tableCell} text-center tabular-nums`}
                                             >
-                                                {exercise.reps}
+                                                {isCardioExercise(exercise) ? '—' : exercise.reps}
                                             </td>
 
                                             <td className={`${ui.tableCell} text-center`}>

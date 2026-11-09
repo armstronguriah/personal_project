@@ -316,7 +316,12 @@ public class SavedProgramService {
                 replacement.getName(),
                 original.sets(),
                 original.reps(),
-                original.targetRpe()
+                original.targetRpe(),
+                original.prescriptionType(),
+                original.durationMinutes(),
+                original.rounds(),
+                original.workSeconds(),
+                original.restSeconds()
         );
 
         exercises.set(exerciseIndex, updatedExercise);

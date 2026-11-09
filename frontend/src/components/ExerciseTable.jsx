@@ -52,7 +52,7 @@ export default function ExerciseTable({
 
                 /* Scrollable Table */
                 <div className="w-full overflow-x-auto">
-                    <table className="w-full min-w-[1100-px] border-collapse text-left">
+                    <table className="w-full min-w-275 border-collapse text-left">
 
                         <thead className="bg-slate-50">
                         <tr>

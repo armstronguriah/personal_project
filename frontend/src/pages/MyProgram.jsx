@@ -215,7 +215,7 @@ export default function MyPrograms() {
     // Loading state
     if (loading) {
         return (
-            <div className="mx-auto max-w-5xl space-y-6">
+            <div className="mx-auto max-w-6xl space-y-8">
                 <h1 className={ui.heading}>My Programs</h1>
 
                 <div className={`${ui.card} flex items-center gap-3`}>
@@ -232,7 +232,7 @@ export default function MyPrograms() {
     // Error state
     if (error) {
         return (
-            <div className="mx-auto max-w-5xl space-y-6">
+            <div className="mx-auto max-w-6xl space-y-8">
                 <h1 className={ui.heading}>My Programs</h1>
 
                 <div
@@ -252,14 +252,14 @@ export default function MyPrograms() {
     }
 
     return (
-        <div className="mx-auto max-w-5xl space-y-8">
+        <div className="mx-auto max-w-6xl space-y-8">
 
             {/* Page Header */}
-            <div className="flex flex-wrap items-start justify-between gap-4">
-                <div className="space-y-2">
-          <span className={ui.badge}>
-            Your Training Library
-          </span>
+            <div className="flex flex-col gap-4 sm:min-h-40 sm:flex-row sm:items-start sm:justify-between">
+                <div className="space-y-3">
+                    <span className={ui.badge}>
+                        Your Training Library
+                    </span>
 
                     <h1 className={ui.heading}>
                         My Programs
@@ -273,7 +273,7 @@ export default function MyPrograms() {
 
                 <Link
                     to="/generate"
-                    className={ui.primaryButton}
+                    className={`${ui.primaryButton} sm:self-center`}
                 >
                     + New Program
                 </Link>

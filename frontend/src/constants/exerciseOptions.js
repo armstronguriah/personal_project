@@ -32,7 +32,9 @@ export const MOVEMENT_OPTIONS = [
     { value: 'VERTICAL_PULL', label: 'Vertical Pull' },
     { value: 'CORE', label: 'Core' },
     { value: 'CARRY', label: 'Carry' },
-    { value: 'ISOLATION', label: 'Isolation' }
+    { value: 'ISOLATION', label: 'Isolation' },
+    { value: 'CARDIO_STEADY', label: 'Steady Cardio' },
+    { value: 'CARDIO_INTERVALS', label: 'Cardio Intervals' }
 ];
 export const EQUIPMENT_PRESETS = {
     BODYWEIGHT: ['Bodyweight'],

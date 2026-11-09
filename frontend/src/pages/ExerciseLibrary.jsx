@@ -230,12 +230,12 @@ function ExerciseLibrary() {
         <div className="mx-auto max-w-6xl space-y-8">
 
             {/* Page Header */}
-            <div className="flex flex-wrap items-center justify-between gap-4">
+            <div className="flex flex-col gap-4 sm:min-h-40 sm:flex-row sm:items-start sm:justify-between">
 
                 <div className="space-y-3">
-    <span className={ui.badge}>
-      Exercise Database
-    </span>
+                    <span className={ui.badge}>
+                        Exercise Database
+                    </span>
 
                     <h1 className={ui.heading}>
                         Exercise Explorer
@@ -250,7 +250,7 @@ function ExerciseLibrary() {
                 <button
                     type="button"
                     onClick={handleAddExerciseClick}
-                    className={ui.primaryButton}
+                    className={`${ui.primaryButton} sm:self-center`}
                 >
                     + Add Exercise
                 </button>

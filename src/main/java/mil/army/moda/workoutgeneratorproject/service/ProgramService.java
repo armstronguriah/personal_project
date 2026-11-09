@@ -749,6 +749,16 @@ public class ProgramService {
         for (WorkoutType type : split) {
             int sessionNumber = schedule.size() + 1;
 
+            // Endurance sessions feature cardio; Hybrid sessions mix in conditioning.
+            boolean cardioDay = goal == TrainingGoal.ENDURANCE ||
+                    (goal == TrainingGoal.HYBRID && (
+                            trainingDays == 1 || sessionNumber % 2 == 0 ||
+                                    (trainingDays == 3 && sessionNumber == 3)));
+
+            int resistanceTarget = goal == TrainingGoal.ENDURANCE
+                    ? (sessionMinutes >= 60 && type != WorkoutType.ACTIVE_RECOVERY ? 2 : 0)
+                    : (cardioDay ? Math.max(1, target - 1) : target);
+
             int occurrence = occurrences.merge(
                     type, 1, Integer::sum
             );
@@ -757,7 +767,7 @@ public class ProgramService {
             Set<Long> usedToday = new HashSet<>();
 
             for (ExerciseSlot slot : slotsFor(type, occurrence)) {
-                if (exercises.size() >= target) {
+                if (exercises.size() >= resistanceTarget) {
                     break;
                 }
 
@@ -800,6 +810,46 @@ public class ProgramService {
                     if (usedToday.add(exercise.exerciseId())) {
                         exercises.add(exercise);
                     }
+                });
+            }
+
+            if (cardioDay) {
+                // Interval days alternate with steady aerobic days.
+                boolean intervals = type != WorkoutType.ACTIVE_RECOVERY &&
+                        (goal == TrainingGoal.ENDURANCE
+                                ? sessionNumber % 2 == 0
+                                : sessionNumber % 4 == 0 || sessionNumber == 3);
+                MovementPattern cardioPattern = intervals ? CARDIO_INTERVALS : CARDIO_STEADY;
+                String cardioFocus = intervals && !"BEGINNER".equalsIgnoreCase(experience)
+                        ? "Anaerobic" : (goal == TrainingGoal.ENDURANCE && !intervals
+                        && sessionMinutes >= 60 && availableEquipment.contains("Bodyweight")
+                        ? "Long Aerobic" : "Aerobic");
+
+                List<String> cardioPriority = List.of("Bodyweight", "Machine");
+                Optional<WorkoutExercise> cardio = selectionService.selectExercise(
+                        cardioPattern, availableEquipment, 0, 0,
+                        usedToday, cardioFocus, cardioPriority);
+
+                // Ensure a cardio row exists in exercises_seed.csv and is enabled in the DB.
+                cardio.ifPresent(exercise -> {
+                    WorkoutExercise prescription;
+                    if (intervals) {
+                        int rounds = "BEGINNER".equalsIgnoreCase(experience) ? 4 : 6;
+                        int work = "BEGINNER".equalsIgnoreCase(experience) ? 20 : 30;
+                        int rest = "BEGINNER".equalsIgnoreCase(experience) ? 100 : 90;
+                        int totalMinutes = 10 + (int) Math.ceil(rounds * (work + rest) / 60.0);
+                        prescription = WorkoutExercise.intervalCardio(
+                                exercise.exerciseId(), exercise.exerciseName(),
+                                rounds, work, rest, totalMinutes, 6.0);
+                    } else {
+                        int minutes = goal == TrainingGoal.ENDURANCE
+                                ? Math.max(12, sessionMinutes - (resistanceTarget > 0 ? 30 : 10))
+                                : Math.min(25, Math.max(10, sessionMinutes / 3));
+                        prescription = WorkoutExercise.steadyCardio(
+                                exercise.exerciseId(), exercise.exerciseName(), minutes, 6.0);
+                    }
+                    exercises.add(prescription);
+                    usedToday.add(exercise.exerciseId());
                 });
             }
 

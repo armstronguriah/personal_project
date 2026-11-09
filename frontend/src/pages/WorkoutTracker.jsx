@@ -1,7 +1,8 @@
+import {useEffect, useState} from 'react';
+import {Link} from 'react-router-dom';
+import {ui} from '../styles/ui';
+import {formatWorkoutPrescription, isCardioExercise} from '../utils/workoutPrescription';
 
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ui } from '../styles/ui';
 
 function entryKey(exerciseId, setNumber) {
     return `${exerciseId}:${setNumber}`;
@@ -313,7 +314,7 @@ export default function WorkoutTracker() {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ sets })
+                    body: JSON.stringify({sets})
                 }
             );
 
@@ -481,7 +482,7 @@ export default function WorkoutTracker() {
                                     className="flex flex-wrap gap-2"
                                 >
                                     {Array.from(
-                                        { length: totalWeeks },
+                                        {length: totalWeeks},
                                         (_, index) => index + 1
                                     ).map((weekNumber) => (
                                         <button
@@ -581,128 +582,137 @@ export default function WorkoutTracker() {
                                                 </h3>
 
                                                 <p className="mt-1 text-sm text-slate-500">
-                                                    {exercise.sets} sets × {exercise.reps} reps
+                                                    {formatWorkoutPrescription(exercise)}
                                                 </p>
                                             </div>
 
                                             <span className={ui.badge}>
                                                 Target RPE: {
-                                                    exercise.targetRpe ?? '—'
-                                                }
+                                                exercise.targetRpe ?? '—'
+                                            }
                                              </span>
                                         </div>
 
-                                        {/* Set Entry Table */}
-                                        <div className="overflow-x-auto">
-                                            <table className="w-full min-w-[500px] border-collapse">
+                                        {isCardioExercise(exercise) && (
+                                            <p className="text-sm text-slate-500">
+                                                Cardio duration and interval results are not logged yet.
+                                                You can still mark this session complete.
+                                            </p>
+                                        )}
 
-                                                <thead>
-                                                <tr>
-                                                    <th className={ui.tableHeader}>
-                                                        Set
-                                                    </th>
+                                        {/* Set Entry Table — resistance exercises only */}
+                                        {!isCardioExercise(exercise) && (
+                                            <div className="overflow-x-auto">
+                                                <table className="w-full min-w-[500px] border-collapse">
 
-                                                    <th className={ui.tableHeader}>
-                                                        Weight (lb)
-                                                    </th>
+                                                    <thead>
+                                                    <tr>
+                                                        <th className={ui.tableHeader}>
+                                                            Set
+                                                        </th>
 
-                                                    <th className={ui.tableHeader}>
-                                                        Reps
-                                                    </th>
+                                                        <th className={ui.tableHeader}>
+                                                            Weight (lb)
+                                                        </th>
 
-                                                    <th className={ui.tableHeader}>
-                                                        Actual RPE
-                                                    </th>
-                                                </tr>
-                                                </thead>
+                                                        <th className={ui.tableHeader}>
+                                                            Reps
+                                                        </th>
 
-                                                <tbody>
-                                                {Array.from(
-                                                    { length: exercise.sets },
-                                                    (_, index) => index + 1
-                                                ).map((setNumber) => {
-                                                    const key = entryKey(
-                                                        exercise.exerciseId,
-                                                        setNumber
-                                                    );
+                                                        <th className={ui.tableHeader}>
+                                                            Actual RPE
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
 
-                                                    const entry = entries[key] ?? {
-                                                        weightLb: '',
-                                                        reps: String(exercise.reps),
-                                                        actualRpe: ''
-                                                    };
+                                                    <tbody>
+                                                    {Array.from(
+                                                        {length: exercise.sets},
+                                                        (_, index) => index + 1
+                                                    ).map((setNumber) => {
+                                                        const key = entryKey(
+                                                            exercise.exerciseId,
+                                                            setNumber
+                                                        );
 
-                                                    return (
-                                                        <tr key={setNumber}>
-                                                            <td className={ui.tableCell}>
-                                                                {setNumber}
-                                                            </td>
+                                                        const entry = entries[key] ?? {
+                                                            weightLb: '',
+                                                            reps: String(exercise.reps),
+                                                            actualRpe: ''
+                                                        };
 
-                                                            <td className={ui.tableCell}>
-                                                                <input
-                                                                    type="number"
-                                                                    min="0"
-                                                                    step="any"
-                                                                    value={entry.weightLb}
-                                                                    aria-label={`${exercise.exerciseName} set ${setNumber} weight`}
-                                                                    onChange={(event) =>
-                                                                        handleEntryChange(
-                                                                            exercise,
-                                                                            setNumber,
-                                                                            'weightLb',
-                                                                            event.target.value
-                                                                        )
-                                                                    }
-                                                                    className={`${ui.input} min-w-24`}
-                                                                    placeholder="0"
-                                                                />
-                                                            </td>
+                                                        return (
+                                                            <tr key={setNumber}>
+                                                                <td className={ui.tableCell}>
+                                                                    {setNumber}
+                                                                </td>
 
-                                                            <td className={ui.tableCell}>
-                                                                <input
-                                                                    type="number"
-                                                                    min="1"
-                                                                    step="1"
-                                                                    value={entry.reps}
-                                                                    aria-label={`${exercise.exerciseName} set ${setNumber} reps`}
-                                                                    onChange={(event) =>
-                                                                        handleEntryChange(
-                                                                            exercise,
-                                                                            setNumber,
-                                                                            'reps',
-                                                                            event.target.value
-                                                                        )
-                                                                    }
-                                                                    className={`${ui.input} min-w-20`}
-                                                                />
-                                                            </td>
+                                                                <td className={ui.tableCell}>
+                                                                    <input
+                                                                        type="number"
+                                                                        min="0"
+                                                                        step="any"
+                                                                        value={entry.weightLb}
+                                                                        aria-label={`${exercise.exerciseName} set ${setNumber} weight`}
+                                                                        onChange={(event) =>
+                                                                            handleEntryChange(
+                                                                                exercise,
+                                                                                setNumber,
+                                                                                'weightLb',
+                                                                                event.target.value
+                                                                            )
+                                                                        }
+                                                                        className={`${ui.input} min-w-24`}
+                                                                        placeholder="0"
+                                                                    />
+                                                                </td>
 
-                                                            <td className={ui.tableCell}>
-                                                                <input
-                                                                    type="number"
-                                                                    min="1"
-                                                                    max="10"
-                                                                    step="0.5"
-                                                                    value={entry.actualRpe}
-                                                                    aria-label={`${exercise.exerciseName} set ${setNumber} actual RPE`}
-                                                                    onChange={(event) =>
-                                                                        handleEntryChange(
-                                                                            exercise,
-                                                                            setNumber,
-                                                                            'actualRpe',
-                                                                            event.target.value
-                                                                        )
-                                                                    }
-                                                                    className={`${ui.input} min-w-20`}
-                                                                    placeholder="Optional"
-                                                                />
-                                                            </td>
-                                                        </tr>
-                                                    );
-                                                })}
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                                                <td className={ui.tableCell}>
+                                                                    <input
+                                                                        type="number"
+                                                                        min="1"
+                                                                        step="1"
+                                                                        value={entry.reps}
+                                                                        aria-label={`${exercise.exerciseName} set ${setNumber} reps`}
+                                                                        onChange={(event) =>
+                                                                            handleEntryChange(
+                                                                                exercise,
+                                                                                setNumber,
+                                                                                'reps',
+                                                                                event.target.value
+                                                                            )
+                                                                        }
+                                                                        className={`${ui.input} min-w-20`}
+                                                                    />
+                                                                </td>
+
+                                                                <td className={ui.tableCell}>
+                                                                    <input
+                                                                        type="number"
+                                                                        min="1"
+                                                                        max="10"
+                                                                        step="0.5"
+                                                                        value={entry.actualRpe}
+                                                                        aria-label={`${exercise.exerciseName} set ${setNumber} actual RPE`}
+                                                                        onChange={(event) =>
+                                                                            handleEntryChange(
+                                                                                exercise,
+                                                                                setNumber,
+                                                                                'actualRpe',
+                                                                                event.target.value
+                                                                            )
+                                                                        }
+                                                                        className={`${ui.input} min-w-20`}
+                                                                        placeholder="Optional"
+                                                                    />
+                                                                </td>
+                                                            </tr>
+                                                        );
+                                                    })}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        )}
                                     </article>
                                 )
                             )}

@@ -114,11 +114,11 @@ export default function Dashboard() {
         <div className="mx-auto max-w-6xl space-y-8">
 
             {/* Header */}
-            <section className="flex flex-wrap items-start justify-between gap-5">
+            <section className="flex flex-col gap-4 sm:min-h-40 sm:flex-row sm:items-start sm:justify-between">
                 <div className="space-y-3">
-          <span className={ui.badge}>
-            Training Overview
-          </span>
+                    <span className={ui.badge}>
+                        Training Overview
+                    </span>
 
                     <h1 className={ui.heading}>
                         Dashboard
@@ -132,7 +132,7 @@ export default function Dashboard() {
 
                 <Link
                     to="/generate"
-                    className={ui.primaryButton}
+                    className={`${ui.primaryButton} sm:self-center`}
                 >
                     + New Program
                 </Link>
@@ -149,7 +149,7 @@ export default function Dashboard() {
             )}
 
             {/* Statistics */}
-            <section className="space-y-4">
+            <section className="space-y-3">
                 <h2 className="text-xl font-bold text-slate-900">
                     Your Statistics
                 </h2>
@@ -177,7 +177,7 @@ export default function Dashboard() {
             </section>
 
             {/* Quick Actions */}
-            <section className="space-y-4">
+            <section className="space-y-3">
                 <h2 className="text-xl font-bold text-slate-900">
                     Quick Actions
                 </h2>
@@ -254,7 +254,7 @@ export default function Dashboard() {
             </section>
 
             {/* Recent Programs */}
-            <section className="space-y-4">
+            <section className="space-y-3">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                     <h2 className="text-xl font-bold text-slate-900">
                         Recent Programs
@@ -324,8 +324,8 @@ export default function Dashboard() {
                                             </div>
 
                                             <span className={ui.badge}>
-                        {progress}% Complete
-                      </span>
+                                                {progress}% Complete
+                                            </span>
                                         </div>
 
                                         {/* Progress Bar */}

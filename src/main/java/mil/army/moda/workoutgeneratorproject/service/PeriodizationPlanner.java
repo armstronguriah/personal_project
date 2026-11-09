@@ -30,6 +30,11 @@ public final class PeriodizationPlanner {
             );
         }
 
+        // Do not treat minutes/intervals as resistance sets and repetitions.
+        if (exercise.isCardio()) {
+            return applyCardio(exercise, week, experience);
+        }
+
         WeekPlan plan = getWeekPlan(goal, week);
 
         int sets;
@@ -72,6 +77,30 @@ public final class PeriodizationPlanner {
                 reps,
                 rpe
         );
+    }
+    private static WorkoutExercise applyCardio(WorkoutExercise exercise, int week, String experience) {
+        boolean deload = week == 4 || week == 8;
+        boolean beginner = "BEGINNER".equalsIgnoreCase(experience);
+        double rpe = deload ? 5.0 : Math.min(beginner ? 7.0 : 8.0,
+                6.0 + Math.min(2, (week - 1) % 4) * 0.5);
+
+        if ("DURATION".equals(exercise.prescriptionType())) {
+            int base = exercise.durationMinutes();
+            int minutes = deload ? Math.max(10, (int) Math.round(base * 0.7))
+                    : base + (beginner ? 2 : 3) * ((week - 1) % 4);
+            return WorkoutExercise.steadyCardio(
+                    exercise.exerciseId(), exercise.exerciseName(), minutes, rpe);
+        }
+
+        int baseRounds = exercise.rounds();
+        int rounds = deload ? Math.max(3, baseRounds - 2)
+                : baseRounds + Math.min(2, (week - 1) % 4);
+        // Easy warmup and cooldown are accounted for in the approximate total.
+        int totalMinutes = 10 + (int) Math.ceil(
+                rounds * (exercise.workSeconds() + exercise.restSeconds()) / 60.0);
+        return WorkoutExercise.intervalCardio(
+                exercise.exerciseId(), exercise.exerciseName(), rounds,
+                exercise.workSeconds(), exercise.restSeconds(), totalMinutes, rpe);
     }
 
     private static WeekPlan getWeekPlan(

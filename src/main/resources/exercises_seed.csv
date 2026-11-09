@@ -237,3 +237,16 @@ Machine Standing Calf Raise,Calves,Machine,ISOLATION,Use a controlled range of m
 Machine Hip Abduction,Glutes,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
 Machine Hip Adduction,Adductors,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
 Machine Glute Kickback,Glutes,Machine,ISOLATION,Use a controlled range of motion for the target muscle.
+
+Easy Run,Aerobic,Bodyweight,CARDIO_STEADY,Steady conversational pace on a safe route.
+Long Run,Long Aerobic,Bodyweight,CARDIO_STEADY,Continuous easy-paced running for aerobic capacity.
+Brisk Walk,Low Impact,Bodyweight,CARDIO_STEADY,Walk continuously at an easy to moderate effort.
+Jogging,Aerobic,Bodyweight,CARDIO_STEADY,Continuous comfortable jogging.
+Stationary Bike,Aerobic,Machine,CARDIO_STEADY,Cycle steadily at an aerobic intensity.
+Treadmill Run,Aerobic,Machine,CARDIO_STEADY,Run steadily at a comfortable treadmill pace.
+Run Walk Intervals,Aerobic,Bodyweight,CARDIO_INTERVALS,Alternate manageable run and walk bouts.
+Easy Bike Intervals,Aerobic,Machine,CARDIO_INTERVALS,Alternate moderate cycling with easy recovery.
+Hill Sprint Intervals,Anaerobic,Bodyweight,CARDIO_INTERVALS,Short hard uphill intervals with full recovery.
+Shuttle Run Intervals,Anaerobic,Bodyweight,CARDIO_INTERVALS,Repeat short fast shuttle efforts with recovery.
+Sprint Intervals,Anaerobic,Bodyweight,CARDIO_INTERVALS,Repeat brief fast runs with walking recovery.
+Bike Sprint Intervals,Anaerobic,Machine,CARDIO_INTERVALS,Alternate hard cycling bouts with easy spinning.

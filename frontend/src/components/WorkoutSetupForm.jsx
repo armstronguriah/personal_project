@@ -8,6 +8,7 @@ import {
 
 import GeneratedWorkout from './GeneratedWorkout.jsx';
 import {ui} from '../styles/ui';
+import StyledSelect from "./StyledSelect.jsx";
 
 const DRAFT_STORAGE_KEY = 'workout-generator-draft-v1';
 
@@ -345,22 +346,27 @@ function WorkoutSetupForm() {
                             Primary Fitness Goal
                         </label>
 
-                        <select
+                        <StyledSelect
                             id="goal"
                             name="goal"
                             value={preferences.goal}
-                            onChange={handleChange}
+                            onValueChange={(value) =>
+                                handleChange({
+                                    target: {
+                                        name: 'goal',
+                                        value
+                                    }
+                                })
+                            }
+                            placeholder="Select Goal"
                             required
-                            className={ui.input}
-                        >
-                            <option value="">Select Goal</option>
-                            <option value="STRENGTH">Strength</option>
-                            <option value="HYPERTROPHY">Muscle Growth</option>
-                            <option value="ENDURANCE">Endurance</option>
-                            <option value="HYBRID">
-                                Hybrid / General Fitness
-                            </option>
-                        </select>
+                            options={[
+                                { value: 'STRENGTH', label: 'Strength' },
+                                { value: 'HYPERTROPHY', label: 'Muscle Growth' },
+                                { value: 'ENDURANCE', label: 'Endurance' },
+                                { value: 'HYBRID', label: 'Hybrid / General Fitness' }
+                            ]}
+                        />
                     </div>
 
                     {/* Experience */}
@@ -369,19 +375,28 @@ function WorkoutSetupForm() {
                             Experience Level
                         </label>
 
-                        <select
+
+                        <StyledSelect
                             id="experience"
                             name="experience"
                             value={preferences.experience}
-                            onChange={handleChange}
+                            onValueChange={(value) =>
+                                handleChange({
+                                    target: {
+                                        name: 'experience',
+                                        value
+                                    }
+                                })
+                            }
+                            placeholder="Select Experience"
                             required
-                            className={ui.input}
-                        >
-                            <option value="">Select Experience</option>
-                            <option value="BEGINNER">Beginner</option>
-                            <option value="INTERMEDIATE">Intermediate</option>
-                            <option value="ADVANCED">Advanced</option>
-                        </select>
+                            options={[
+                                { value: 'BEGINNER', label: 'Beginner' },
+                                { value: 'INTERMEDIATE', label: 'Intermediate' },
+                                { value: 'ADVANCED', label: 'Advanced' }
+                            ]}
+                        />
+
                     </div>
 
                     {/* Training Days */}
@@ -390,21 +405,27 @@ function WorkoutSetupForm() {
                             Training Days Per Week
                         </label>
 
-                        <select
+
+                        <StyledSelect
                             id="trainingDays"
                             name="trainingDays"
                             value={preferences.trainingDays}
-                            onChange={handleChange}
+                            onValueChange={(value) =>
+                                handleChange({
+                                    target: {
+                                        name: 'trainingDays',
+                                        value
+                                    }
+                                })
+                            }
+                            placeholder="Select Days"
                             required
-                            className={ui.input}
-                        >
-                            <option value="">Select Days</option>
-                            {[1, 2, 3, 4, 5, 6, 7].map((day) => (
-                                <option key={day} value={day}>
-                                    {day} {day === 1 ? 'Day' : 'Days'}
-                                </option>
-                            ))}
-                        </select>
+                            options={[1, 2, 3, 4, 5, 6, 7].map((day) => ({
+                                value: String(day),
+                                label: `${day} ${day === 1 ? 'Day' : 'Days'}`
+                            }))}
+                        />
+
                     </div>
 
                     {/* Session Duration */}
@@ -413,21 +434,27 @@ function WorkoutSetupForm() {
                             Workout Duration
                         </label>
 
-                        <select
+
+                        <StyledSelect
                             id="sessionMinutes"
                             name="sessionMinutes"
                             value={preferences.sessionMinutes}
-                            onChange={handleChange}
+                            onValueChange={(value) =>
+                                handleChange({
+                                    target: {
+                                        name: 'sessionMinutes',
+                                        value
+                                    }
+                                })
+                            }
+                            placeholder="Select Duration"
                             required
-                            className={ui.input}
-                        >
-                            <option value="">Select Duration</option>
-                            {[30, 45, 60, 90, 120].map((minutes) => (
-                                <option key={minutes} value={minutes}>
-                                    {minutes} Minutes
-                                </option>
-                            ))}
-                        </select>
+                            options={[30, 45, 60, 90, 120].map((minutes) => ({
+                                value: String(minutes),
+                                label: `${minutes} Minutes`
+                            }))}
+                        />
+
                     </div>
 
 
@@ -436,20 +463,27 @@ function WorkoutSetupForm() {
                             Program Length
                         </label>
 
-                        <select
+
+                        <StyledSelect
                             id="programWeeks"
                             name="programWeeks"
                             value={preferences.programWeeks}
-                            onChange={handleChange}
+                            onValueChange={(value) =>
+                                handleChange({
+                                    target: {
+                                        name: 'programWeeks',
+                                        value
+                                    }
+                                })
+                            }
+                            placeholder="Select Program Length"
                             required
-                            className={ui.input}
-                        >
-                            <option value="4">4 Weeks</option>
-                            <option value="5">5 Weeks</option>
-                            <option value="6">6 Weeks</option>
-                            <option value="7">7 Weeks</option>
-                            <option value="8">8 Weeks</option>
-                        </select>
+                            options={[4, 5, 6, 7, 8].map((weeks) => ({
+                                value: String(weeks),
+                                label: `${weeks} Weeks`
+                            }))}
+                        />
+
                     </div>
 
 
@@ -462,21 +496,27 @@ function WorkoutSetupForm() {
                             Available Equipment
                         </label>
 
-                        <select
+
+                        <StyledSelect
                             id="equipmentAccess"
                             name="equipmentAccess"
                             value={preferences.equipmentAccess}
-                            onChange={handleEquipmentAccessChange}
+                            onValueChange={(value) =>
+                                handleEquipmentAccessChange({
+                                    target: { value }
+                                })
+                            }
+                            placeholder="Select Equipment"
                             required
-                            className={ui.input}
-                        >
-                            <option value="">Select Equipment</option>
-                            <option value="FULL_GYM">Full Gym</option>
-                            <option value="BARBELL">Barbell and Rack</option>
-                            <option value="DUMBBELL">Dumbbells</option>
-                            <option value="BODYWEIGHT">Bodyweight Only</option>
-                            <option value="CUSTOM">Custom Equipment</option>
-                        </select>
+                            options={[
+                                { value: 'FULL_GYM', label: 'Full Gym' },
+                                { value: 'BARBELL', label: 'Barbell and Rack' },
+                                { value: 'DUMBBELL', label: 'Dumbbells' },
+                                { value: 'BODYWEIGHT', label: 'Bodyweight Only' },
+                                { value: 'CUSTOM', label: 'Custom Equipment' }
+                            ]}
+                        />
+
 
                         {/* Custom Equipment Checkboxes */}
                         {preferences.equipmentAccess === 'CUSTOM' && (
@@ -786,7 +826,7 @@ function WorkoutSetupForm() {
                                     onChange={(event) =>
                                         setProgramName(event.target.value)
                                     }
-                                    placeholder="My Strength Program"
+                                    placeholder="My Program"
                                     className={ui.input}
                                 />
                             </div>

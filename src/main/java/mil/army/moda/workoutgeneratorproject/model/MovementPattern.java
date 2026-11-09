@@ -11,5 +11,7 @@ public enum MovementPattern {
     VERTICAL_PULL,
     CORE,
     CARRY,
-    ISOLATION
+    ISOLATION,
+    CARDIO_STEADY,
+    CARDIO_INTERVALS
 }
